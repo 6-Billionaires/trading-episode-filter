@@ -1,0 +1,10 @@
+.idea/misc.xml
+.idea/modules.xml
+.idea/trading-episode-filter.iml
+.idea/workspace.xml
+.idea/vcs.xml
+/.idea/
+/__pycache__/
+/output/target/
+/core/__pycache__/
+/helper/__pycache__/
