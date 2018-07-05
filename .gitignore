@@ -8,3 +8,4 @@
 /output/target/
 /core/__pycache__/
 /helper/__pycache__/
+venv/

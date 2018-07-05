@@ -12,6 +12,8 @@ import core.executed as ex
 
 #os.environ['HTTP_PROXY']='http://70.10.15.10:8080'
 #os.environ['HTTPS_PROXY']='http://70.10.15.10:8080'
+path_seperator = "/"
+
 
 def get_df_toDb(start_date, end_date, min_rate, max_rate):
     sql = (
@@ -59,10 +61,10 @@ def create_episode_file(df, episode_type):
         file_name = convert_date + '_*_' + code + '_*.csv';
 
         for file in glob.glob(src_path + file_name):
-            file_split = file.split("\\")
+            file_split = file.split(path_seperator)
             src_file_name = file_split[len(file_split) - 1]
             dest_file_name = episode_type + "_" + src_file_name
-            dest_file_path = filter_dest_dir + "\\" + dest_file_name
+            dest_file_path = filter_dest_dir + path_seperator + dest_file_name
 
             shutil.copy2(file, dest_file_path)
             file_count = file_count + 1
@@ -75,9 +77,9 @@ def create_episode_file(df, episode_type):
 def create_scaling_episode_file(filter_dest_dir, episode_type):
     file_list = os.listdir(filter_dest_dir)
     int_sec = 1;
-    scaling_dest_path = config.PATH_CONFIG['scaling_dest_path']+episode_type+"\\"
+    scaling_dest_path = config.PATH_CONFIG['scaling_dest_path'] + episode_type + path_seperator
 
-    filter_scaling_mapping_file_path = scaling_dest_path + "mapping\\";
+    filter_scaling_mapping_file_path = scaling_dest_path + "mapping" + path_seperator;
     if os.path.exists(filter_scaling_mapping_file_path) is False:
         os.makedirs(filter_scaling_mapping_file_path)
 
@@ -89,21 +91,21 @@ def create_scaling_episode_file(filter_dest_dir, episode_type):
         date_str = file_split[1].replace("-","")
         code_str = file_split[3]
         scaling_file_name = type_str + "-" + code_str + "-" + date_str
-        path_src = filter_dest_dir + "\\" + file;
+        path_src = filter_dest_dir + path_seperator + file;
         df = pd.DataFrame()
         if file.find("executed") is not -1:
             scaling_file_name += "-quote.csv"
-            machine = ob.OB_Preprocess()
-            df = machine.preprocess(path_src, int_sec)
-            df = machine.scail(df)
+            # machine = ob.OB_Preprocess()
+            # df = machine.preprocess(path_src, int_sec)
+            # df = machine.scail(df)
             df.to_csv(scaling_dest_path + scaling_file_name , index=False)
             file_count = file_count + 1
             print(str(file_count) + ' create... :' + scaling_dest_path + scaling_file_name)
         elif file.find("orderbook") is not -1:
             scaling_file_name += "-order.csv"
-            machine = ex.EX_Preprocess()
-            df = machine.preprocess(path_src, int_sec)
-            df = machine.scail(df)
+            # machine = ex.EX_Preprocess()
+            # df = machine.preprocess(path_src, int_sec)
+            # df = machine.scail(df)
             df.to_csv(scaling_dest_path + scaling_file_name, index=False)
             file_count = file_count + 1
             print(str(file_count) + ' create... :' + scaling_dest_path + scaling_file_name)
@@ -118,7 +120,7 @@ def create_scaling_episode_file(filter_dest_dir, episode_type):
 
 def main(start_date, end_date, min_rate, max_rate, episode_type):
     # df = get_df_toDb(start_date, end_date, min_rate, max_rate)
-    df = pd.read_csv(".\\output\\test\\selectMaxTicker2.csv", dtype={'code': str, 'date': 'str', "type": str})
+    df = pd.read_csv("./output/test/selectMaxTicker.csv", dtype={'code': str, 'date': 'str', "type": str})
     df = df.fillna("")
     # df.to_csv("output\\test\\selectMaxTicker2.csv", index=False)
     print('sql result : ' + str(len(df)))
