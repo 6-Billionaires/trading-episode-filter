@@ -65,9 +65,6 @@ def create_episode_file(df, episode_type):
             src_file_name = file_split[len(file_split) - 1]
             dest_file_name = episode_type + "_" + src_file_name
             dest_file_path = filter_dest_dir + path_seperator + dest_file_name
-
-            print(file)
-            print(dest_file_name)
             shutil.copy2(file, dest_file_path)
             file_count = file_count + 1
             print(str(file_count) + ' copy... :' + file)

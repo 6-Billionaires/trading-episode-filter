@@ -65,11 +65,12 @@ class EX_Preprocess():
     def preprocess(self,path_src,int_sec):
         self.file_name = path_src.replace("\\",self.path_seperator).split(self.path_seperator)[-1]
         self.code = self.file_name.split('_')[-2]
-        self.date = self.file_name.split('_')[1]
+        self.date = self.file_name.split('_')[-4]
 
         print(str(self.file_name) + " / Pre-processing......")
 
-        df_executed = pd.read_csv(path_src, encoding='cp949', names=self.col1)
+        #df_executed = pd.read_csv(path_src, encoding='cp949', names=self.col1)
+        df_executed = pd.read_csv(path_src, encoding='utf-8', names=self.col1)
         df_executed.iloc[:, 2] = list(map(tf.timestamp2time, df_executed.iloc[:, 2]))
 
         total_data = {}
@@ -163,6 +164,7 @@ class EX_Preprocess():
         df_price.index = list(map(lambda x:x[1:], df_price.index))
 
         df_shareratio = pd.read_csv('data/stock_shareratio_20180627_csv.csv', index_col=0, thousands=",", encoding='cp949')
+
         df_shareratio.index = list(map(lambda x:x[1:], df_shareratio.index))
 
         mt_col = df_price.columns.get_loc(self.date)
@@ -175,9 +177,9 @@ class EX_Preprocess():
         df[df.columns[4]] = df[df.columns[4]] / yestday_price
         df[df.columns[6:]] = df[df.columns[6:]] / yestday_price
 
-        df[df.columns[1]] = (df[df.columns[1]] / market_shares).applymap(np.log)
-        df[df.columns[3]] = (df[df.columns[3]] / market_shares).applymap(np.log)
-        df[df.columns[5]] = (df[df.columns[5]] / market_shares).applymap(np.log)
+        df[df.columns[1]] = (df[df.columns[1]] / market_shares).apply(np.log)
+        df[df.columns[3]] = (df[df.columns[3]] / market_shares).apply(np.log)
+        df[df.columns[5]] = (df[df.columns[5]] / market_shares).apply(np.log)
 
 
         return df
