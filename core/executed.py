@@ -14,6 +14,7 @@ class EX_Preprocess():
         self.code = None
         self.date = None
 
+        self.path_seperator = "/"
     def makeCol1(self):
         col = []
 
@@ -62,7 +63,7 @@ class EX_Preprocess():
         return col
 
     def preprocess(self,path_src,int_sec):
-        self.file_name = path_src.split("\\")[-1]
+        self.file_name = path_src.replace("\\",self.path_seperator).split(self.path_seperator)[-1]
         self.code = self.file_name.split('_')[-2]
         self.date = self.file_name.split('_')[1]
 

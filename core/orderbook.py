@@ -12,6 +12,7 @@ class OB_Preprocess():
         self.date = None
         self.file_name = None
 
+        self.path_seperator = "/"
     def makeCol(self):
         col = []
         col.append('Code')
@@ -32,7 +33,7 @@ class OB_Preprocess():
         return col
 
     def preprocess(self,path_src,int_sec):
-        self.file_name = path_src.split("\\")[-1]
+        self.file_name = path_src.replace("\\",self.path_seperator).split(self.path_seperator)[-1]
         print(str(self.file_name) + " / Pre-processing......")
 
         self.code = self.file_name.split('_')[-2]

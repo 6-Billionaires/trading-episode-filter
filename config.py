@@ -12,10 +12,10 @@ DATABASE_CONFIG = {
 }
 
 PATH_CONFIG = {
-    # 'src_path' : 'D:\\MarketMicrostructureData\\OUTPUT2\\',
-    # 'filter_dest_path' : 'D:\\MarketMicrostructureData\\filter_output\\',
-    # 'scaling_dest_path' : 'D:\\MarketMicrostructureData\\filter_output\\'
-    'src_path' : './output/source/',
-    'filter_dest_path' : './output/target/filter_output/',
-    'scaling_dest_path' : './output/target/scaling_output/'
+    'src_path' : '../OUTPUT2/',
+    'filter_dest_path' : '../filter_output/',
+    'scaling_dest_path' : '../scaling_output/'
+    # 'src_path' : './output/source/',
+    # 'filter_dest_path' : './output/target/filter_output/',
+    # 'scaling_dest_path' : './output/target/scaling_output/'
 }
