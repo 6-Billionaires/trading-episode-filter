@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 import shutil
 import glob
+import logging
 
 from helper import postgresql_helper as pg
 import config
@@ -17,6 +18,7 @@ class Episod_filter():
         self.src_path = config.PATH_CONFIG['src_path']
         self.filter_dest_path = config.PATH_CONFIG['filter_dest_path']
         self.scaling_dest_path = config.PATH_CONFIG['scaling_dest_path']
+        self.logger = logging.getLogger()
 
     def setup(self, path_seperator, src_path, filter_dest_path, scaling_dest_path):
         self.path_seperator = path_seperator
@@ -102,7 +104,10 @@ class Episod_filter():
                 scaling_file_name += "-quote.csv"
                 machine = ex.EX_Preprocess()
                 df = machine.preprocess(path_src, self.int_sec)
-                df = machine.scail(df)
+                try:
+                    df = machine.scail(df)
+                except KeyError as e:
+                    print(e)
                 df.to_csv(scaling_dest_dir + scaling_file_name , index=False)
                 file_count = file_count + 1
                 print(str(file_count) + ' create... :' + self.scaling_dest_path + scaling_file_name)
@@ -110,7 +115,10 @@ class Episod_filter():
                 scaling_file_name += "-order.csv"
                 machine = ob.OB_Preprocess()
                 df = machine.preprocess(path_src, self.int_sec)
-                df = machine.scail(df)
+                try:
+                    df = machine.scail(df)
+                except KeyError as e:
+                    print(e)
                 df.to_csv(scaling_dest_dir + scaling_file_name, index=False)
                 file_count = file_count + 1
                 print(str(file_count) + ' create... :' + self.scaling_dest_path + scaling_file_name)

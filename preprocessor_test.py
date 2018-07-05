@@ -1,5 +1,5 @@
 from core import episode_filter as ef
-
+import pandas as pd
 
 def main(start_date, end_date, min_rate, max_rate, episode_type):
 
@@ -14,10 +14,9 @@ def main(start_date, end_date, min_rate, max_rate, episode_type):
 
     pp.setup(path_seperator, src_path, filter_dest_path, scaling_dest_path)
 
-    df = pp.get_df_toDb(start_date, end_date, min_rate, max_rate)
-    # df = pd.read_csv("./output/test/selectMaxTicker.csv", dtype={'code': str, 'date': 'str', "type": str})
+    # df = pp.get_df_toDb(start_date, end_date, min_rate, max_rate)
+    df = pd.read_csv("./output/test/selectMaxTicker3.csv", dtype={'code': str, 'date': 'str', "type": str})
     df = df.fillna("")
-    # df.to_csv("output\\test\\selectMaxTicker2.csv", index=False)
     print('sql result : ' + str(len(df)))
 
     file_count, filter_dest_dir = pp.create_episode_file(df, episode_type)
