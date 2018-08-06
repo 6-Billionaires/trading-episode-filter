@@ -10,3 +10,4 @@
 /helper/__pycache__/
 venv/
 config.py
+node_modules/
