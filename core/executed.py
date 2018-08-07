@@ -21,14 +21,14 @@ class EX_Preprocess():
         col.append('Code')
         col.append('Time(etrade)')
         col.append('Time(timestamp)')
-        col.append('Price')
-        col.append('Sign')
+        col.append('Price')              #3
+        col.append('Sign')               #4
         col.append('Amounts')
-        col.append('Open')
+        col.append('Open')#6
         col.append('Open Time')
-        col.append('High')
+        col.append('High')#8
         col.append('High Time')
-        col.append('Low')
+        col.append('Low')#10
         col.append('Low Time')
         col.append('Cumulative Amounts')
         col.append('Cumulative Value')
