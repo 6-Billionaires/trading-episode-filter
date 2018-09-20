@@ -1,8 +1,8 @@
-trading-episode-filter
+# trading-episode-filter
 
 
 
-Intro
+## Intro
 
  To set the learning environment with Trading Gym, we need to filter the data  that satisfy the conditions we want to train RL algorithms.  The Episode Filter makes these tasks easier.
 
@@ -10,12 +10,14 @@ Intro
 
 
 
-How to install
+## How to install
 
 You can clone two repository into your local computer or cloud whatever. And you can run agent after including traidng gym as submodule or add gym's root into Python Path and then you can run trading agent itself. so simple!
 
 
 
-Quick Run
+## Quick Run
 
-    
+```
+
+```
